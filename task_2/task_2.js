@@ -9,4 +9,5 @@ const obj = {
 const result = JSON.stringify(obj);
 console.log(result);
 
+// образец:
 // {"name":"Anton","age":36,"skills":["Javascript","HTML","CSS"],"salary":80000}
