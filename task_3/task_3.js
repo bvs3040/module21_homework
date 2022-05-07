@@ -14,14 +14,14 @@ if (userNameJson) {
     let visitTimeJson = localStorage.getItem("lastVisit");
     visitTime = JSON.parse(visitTimeJson);
     alert("Добрый день, " + userName + "! Давно не виделись. В последний раз вы были у нас " + visitTime);
- createVisitTime();
+    createVisitTime();
 } else {
     userName = prompt("Добро пожаловать! Назовите, пожалуйста, ваше имя", "Name");
     if (!userName) {
         localStorage.removeItem("myKey");
     } else {
         localStorage.setItem("myKey", JSON.stringify(userName));
-     createVisitTime();
+        createVisitTime();
     }
 }
 
