@@ -3,13 +3,17 @@ const limitInput = document.querySelector('#limitInput');
 const reqwestBtn = document.querySelector('#reqwest');
 const message = document.querySelector('h3');
 let picturelist = document.querySelector('ul');
+let pictureField = document.querySelector('#pictureField');
 
 // загрузка списка из localStorge
 
 let picturelistJson = localStorage.getItem("myList");
+let imgJson = localStorage.getItem("myImg");
+
 if (picturelistJson) {
     message.innerText = "Ранее смотрели:";
     picturelist.innerHTML = JSON.parse(picturelistJson);
+    pictureField.innerHTML = JSON.parse(imgJson);
 }
 
 // очистка поля ввода 
@@ -25,6 +29,7 @@ reqwestBtn.addEventListener('click', () => {
     const limitNumber = Math.round(Number(limitInput.value ? limitInput.value : 0))
     message.innerText = "";
     picturelist.innerHTML = "";
+    pictureField.innerHTML = "";
 
     // условие запроса
 
@@ -60,11 +65,17 @@ reqwestBtn.addEventListener('click', () => {
                     newPictureLink.setAttribute("href", data[i].download_url)
                     newPictureLink.appendChild(newPictureLinkContent);
 
+                    const newImage = document.createElement('img');
+                    newImage.setAttribute("src", data[i].download_url);
+                    newImage.setAttribute("alt", "picture");
+
                     newPicture.appendChild(newPictureContent);
                     newPicture.appendChild(newPictureLink);
                     picturelist.appendChild(newPicture);
+                    pictureField.appendChild(newImage);
                 }
                 localStorage.setItem('myList', JSON.stringify(picturelist.innerHTML));
+                localStorage.setItem('myImg', JSON.stringify(pictureField.innerHTML));
             })
             .catch(() => {})
     }
